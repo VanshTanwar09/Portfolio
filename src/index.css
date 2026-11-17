@@ -1,0 +1,600 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Base theme and responsive typography */
+@layer base {
+  :root {
+    color-scheme: dark;
+    font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-synthesis: none;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+
+    --background: #090915;
+    --secondary-background: #100d24;
+    --card-background: rgba(15, 11, 42, 0.76);
+    --card-border: rgba(255, 255, 255, 0.1);
+    --accent: #ac3fff;
+    --accent-soft: rgba(172, 63, 255, 0.18);
+    --accent-bright: #e65dff;
+    --text-primary: #eef2ff;
+    --text-secondary: #b9b6d3;
+    --text-muted: #8f8bb3;
+    --shadow: 0 18px 60px rgba(15, 11, 42, 0.35);
+    --border-glow: rgba(172, 63, 255, 0.25);
+    --button-gradient: linear-gradient(135deg, #8b00ff, #d946ef);
+  }
+
+  /* Light Mode Theme */
+  html.light {
+    color-scheme: light;
+
+    --background: #f8f7fc;
+    --secondary-background: #ede9f8;
+    --card-background: rgba(255, 255, 255, 0.92);
+    --card-border: rgba(172, 63, 255, 0.2);
+    --accent: #ac3fff;
+    --accent-soft: rgba(172, 63, 255, 0.12);
+    --accent-bright: #d946ef;
+    --text-primary: #1a1626;
+    --text-secondary: #5a5570;
+    --text-muted: #8a829f;
+    --shadow: 0 18px 60px rgba(172, 63, 255, 0.12);
+    --border-glow: rgba(172, 63, 255, 0.15);
+    --button-gradient: linear-gradient(135deg, #ac3fff, #d946ef);
+  }
+
+  html.light body {
+    background: radial-gradient(circle at top left, rgba(172, 63, 255, 0.08), transparent 25%),
+      radial-gradient(circle at bottom right, rgba(217, 70, 239, 0.06), transparent 20%),
+      linear-gradient(180deg, #f8f7fc 0%, #f5f3fa 50%, #ede9f8 100%);
+  }
+
+  html.light ::selection {
+    background: rgba(172, 63, 255, 0.2);
+    color: #1a1626;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    font-size: 16px;
+    min-height: 100%;
+    transition: background-color 0.4s ease, color 0.4s ease;
+    overflow-x: hidden;
+    width: 100%;
+    max-width: 100%;
+  }
+
+  body {
+    margin: 0;
+    min-height: 100vh;
+    background: radial-gradient(circle at top left, rgba(138, 51, 255, 0.18), transparent 22%),
+      radial-gradient(circle at bottom right, rgba(214, 70, 239, 0.12), transparent 18%),
+      linear-gradient(180deg, #07070f 0%, #090915 45%, #0c0a1b 100%);
+    color: var(--text-primary);
+    background-attachment: fixed;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    overflow-x: hidden;
+    width: 100%;
+    max-width: 100%;
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+
+  img {
+    display: block;
+    max-width: 100%;
+    height: auto;
+    object-fit: cover;
+  }
+
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  button,
+  input,
+  textarea,
+  select {
+    font: inherit;
+  }
+
+  ::selection {
+    background: rgba(172, 63, 255, 0.35);
+    color: #fff;
+  }
+}
+
+/* Shared utility components */
+@layer components {
+.btn-primary {
+    @apply inline-flex items-center justify-center rounded-full font-semibold transition-all duration-300 ease-out;
+    padding: 0.95rem 1.7rem;
+    min-height: 3rem;
+    background: var(--button-gradient);
+    background-size: 200% 200%;
+    box-shadow: 0 18px 50px rgba(139, 0, 255, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    color: white;
+  }
+
+  .btn-primary:hover,
+  .btn-primary:focus-visible {
+    transform: translateY(-1px);
+    background-position: right center;
+    box-shadow: 0 22px 60px rgba(217, 70, 239, 0.28);
+  }
+
+  .card {
+    @apply bg-card-background border rounded-3xl transition-all duration-300 ease-out;
+    border-color: var(--card-border);
+    box-shadow: var(--shadow);
+    backdrop-filter: blur(18px);
+    overflow: hidden;
+  }
+
+  /* Enhanced card hover - smooth neon glow on desktop */
+  @media (hover: hover) {
+    .card:hover {
+      border-color: rgba(172, 63, 255, 0.35);
+      /* Additional neon glow effect */
+      box-shadow: 
+        0 8px 40px rgba(15, 11, 42, 0.35),
+        0 0 30px rgba(172, 63, 255, 0.2),
+        0 0 60px rgba(214, 70, 239, 0.1);
+      transform: translateY(-4px);
+    }
+  }
+
+  /* Smooth transition for card hover effects */
+  .card {
+    transition: transform 0.35s ease, box-shadow 0.35s ease, border-color 0.35s ease;
+  }
+
+.glow-text {
+    color: var(--accent);
+    text-shadow: 0 0 16px rgba(172, 63, 255, 0.55), 0 0 30px rgba(214, 70, 239, 0.3);
+  }
+
+.hero-heading {
+    display: grid;
+    gap: 0.5rem;
+    font-size: clamp(2.75rem, 5vw, 4.75rem);
+    line-height: 1.05;
+    letter-spacing: -0.03em;
+    max-width: 18ch;
+  }
+
+  /* "I am" - smaller, reduced */
+  .hero-heading .greeting {
+    display: block;
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 500;
+    font-size: 0.4em;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text-secondary);
+    margin-bottom: 0.15rem;
+  }
+
+  /* "Vansh" - main focus, larger and heavier */
+  .hero-heading .name {
+    display: block;
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 800;
+    font-size: 1.3em;
+    letter-spacing: -0.02em;
+    color: var(--text-primary);
+    line-height: 1;
+  }
+
+  /* "Data Analyst" - Sora SemiBold Italic with gradient */
+  .hero-heading .role-line {
+    display: block;
+  }
+
+  .hero-heading .highlight {
+    /* Pink/purple gradient color */
+    background: linear-gradient(135deg, #ac3fff 0%, #d946ef 50%, #e65dff 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    /* Sora SemiBold Italic */
+    font-family: 'Sora', sans-serif;
+    font-weight: 600;
+    font-style: italic;
+    /* Glow text shadow effect */
+    text-shadow: 0 0 20px rgba(172, 63, 255, 0.5), 0 0 40px rgba(214, 70, 239, 0.3);
+    filter: drop-shadow(0 0 8px rgba(172, 63, 255, 0.4));
+    display: inline-block;
+    font-size: 0.85em;
+  }
+
+  .hero-subtitle {
+    font-size: clamp(1rem, 2vw, 1.1rem);
+    line-height: 1.8;
+    color: var(--text-secondary);
+  }
+
+/* Glowing background behind profile image - static smooth glow */
+  .hero-image-card {
+    position: relative;
+    width: min(300px, 100%);
+    height: min(300px, 100%);
+    border-radius: 2rem;
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    background: linear-gradient(180deg, rgba(28, 14, 73, 0.95), rgba(9, 8, 26, 0.92));
+    /* Soft purple/blue neon shadow around image card */
+    box-shadow: 
+      0 28px 90px rgba(51, 19, 117, 0.45),
+      0 0 60px rgba(172, 63, 255, 0.25),
+      0 0 100px rgba(214, 70, 239, 0.15),
+      inset 0 0 80px rgba(172, 63, 255, 0.1);
+    transition: transform 0.45s ease, box-shadow 0.4s ease;
+  }
+
+  .hero-image-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 
+      0 32px 100px rgba(51, 19, 117, 0.55),
+      0 0 80px rgba(172, 63, 255, 0.35),
+      0 0 120px rgba(214, 70, 239, 0.2),
+      inset 0 0 100px rgba(172, 63, 255, 0.15);
+  }
+
+  .hero-image-wrapper {
+    width: 100%;
+    height: 100%;
+    position: relative;
+  }
+
+.hero-profile-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top center;
+    /* Smooth premium zoom in → zoom out loop - synchronized with glow */
+    animation: zoomPulse 5s ease-in-out infinite;
+  }
+
+  /* Synchronized: image zoom and glow pulse happen together on same element */
+  .hero-image-card {
+    /* Image card with soft pulsing glow - synchronized with image zoom */
+    animation: syncedGlowPulse 5s ease-in-out infinite;
+  }
+
+  .hero-image-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at 30% 20%, rgba(172, 63, 255, 0.22), transparent 42%),
+      radial-gradient(circle at 70% 80%, rgba(214, 70, 239, 0.16), transparent 32%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .hero-social-icon {
+    @apply p-3 rounded-2xl transition-all duration-300 ease-out;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    background: rgba(15, 11, 42, 0.72);
+    color: var(--text-primary);
+    box-shadow: inset 0 0 0 rgba(255, 255, 255, 0);
+  }
+
+  .hero-social-icon:hover {
+    transform: translateY(-2px);
+    border-color: rgba(172, 63, 255, 0.4);
+    box-shadow: 0 0 28px rgba(172, 63, 255, 0.18);
+  }
+
+  .section-title {
+    font-size: clamp(2rem, 4vw, 3.5rem);
+    font-weight: 800;
+    letter-spacing: -0.04em;
+    margin: 0;
+    color: var(--text-primary);
+  }
+
+  .section-subtitle {
+    font-size: clamp(1rem, 2vw, 1.15rem);
+    color: var(--text-secondary);
+    max-width: 48rem;
+    margin: 1rem auto 0;
+    line-height: 1.75;
+  }
+
+  .filter-btn {
+    @apply rounded-full border px-5 py-3 text-sm transition-all duration-300 ease-out;
+    border-color: rgba(255, 255, 255, 0.12);
+    color: var(--text-primary);
+    background: rgba(15, 11, 42, 0.4);
+    min-width: 10rem;
+  }
+
+  .filter-btn:hover,
+  .filter-btn.active {
+    border-color: rgba(172, 63, 255, 0.35);
+    background: rgba(172, 63, 255, 0.16);
+    color: var(--accent);
+  }
+
+  .lets-work-section {
+    margin-top: 3rem;
+    padding: 2rem;
+    border-radius: 2rem;
+    background: rgba(15, 11, 42, 0.75);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04), 0 20px 50px rgba(15, 11, 42, 0.25);
+  }
+
+  .lets-work-tag {
+    display: inline-flex;
+    color: var(--accent);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    font-size: 0.72rem;
+    margin-bottom: 1rem;
+  }
+
+  .lets-work-section h2 {
+    font-size: clamp(2rem, 4vw, 2.7rem);
+    margin: 0.5rem 0 1rem;
+  }
+
+  .lets-work-section p {
+    color: var(--text-secondary);
+    line-height: 1.75;
+    margin-bottom: 1.5rem;
+    max-width: 46rem;
+  }
+
+  .lets-work-btn {
+    @apply inline-flex items-center justify-center rounded-full px-6 py-3 font-semibold transition-all duration-300 ease-out;
+    background: rgba(172, 63, 255, 0.18);
+    border: 1px solid rgba(172, 63, 255, 0.3);
+    color: var(--text-primary);
+  }
+
+.lets-work-btn:hover {
+    background: rgba(172, 63, 255, 0.28);
+    transform: translateY(-1px);
+  }
+
+/* Contact Form Input Styles */
+  .contact-input {
+    border-color: rgba(255, 255, 255, 0.1);
+    background: rgba(15, 11, 42, 0.6);
+    transition: border-color 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+  }
+
+  .contact-input:hover {
+    border-color: rgba(172, 63, 255, 0.3);
+    box-shadow: 0 0 15px rgba(172, 63, 255, 0.1);
+  }
+
+  .contact-input:focus {
+    border-color: rgba(172, 63, 255, 0.5);
+    box-shadow: 0 0 20px rgba(172, 63, 255, 0.25);
+    background: rgba(15, 11, 42, 0.8);
+  }
+
+  .contact-input::placeholder {
+    color: var(--text-muted);
+  }
+
+  /* Light mode input improvements */
+  html.light .contact-input {
+    background: rgba(255, 255, 255, 0.9);
+    border-color: rgba(172, 63, 255, 0.2);
+    color: var(--text-primary);
+  }
+
+  html.light .contact-input:hover {
+    border-color: rgba(172, 63, 255, 0.4);
+    box-shadow: 0 0 15px rgba(172, 63, 255, 0.15);
+  }
+
+  html.light .contact-input:focus {
+    border-color: rgba(172, 63, 255, 0.6);
+    box-shadow: 0 0 20px rgba(172, 63, 255, 0.2);
+    background: rgba(255, 255, 255, 1);
+  }
+
+  html.light .contact-input::placeholder {
+    color: var(--text-muted);
+  }
+
+  /* Contact cards - separate each card with proper spacing */
+  .contact-section .card {
+    margin-bottom: 1.25rem;
+  }
+
+  .contact-section .card:last-child {
+    margin-bottom: 0;
+  }
+
+  /* Add visual separation between contact info cards */
+  .contact-info-card {
+    position: relative;
+  }
+
+  .contact-info-card::after {
+    content: '';
+    position: absolute;
+    bottom: -0.625rem;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(172, 63, 255, 0.15), transparent);
+  }
+
+  .contact-info-card:last-child::after {
+    display: none;
+  }
+
+  /* Send Message card - improved visibility */
+  .send-message-card {
+    background: rgba(15, 11, 42, 0.8);
+  }
+
+  html.light .send-message-card {
+    background: rgba(255, 255, 255, 0.95);
+  }
+
+  /* Ensure proper card separation on mobile */
+  @media (max-width: 1023px) {
+    .contact-section .card {
+      margin-bottom: 1rem;
+    }
+  }
+
+  .line-clamp-3 {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+}
+
+/* Premium smooth animations - SYNCHRONIZED */
+
+/* Smooth zoom pulse for profile image */
+@keyframes zoomPulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+}
+
+/* SYNCHRONIZED: Image zoom + glow pulse on SAME element */
+/* When image zooms in (50%) → glow becomes stronger */
+/* When image zooms out (0%/100%) → glow becomes weaker */
+@keyframes syncedGlowPulse {
+  0%, 100% {
+    /* Image at normal scale = weaker glow */
+    box-shadow: 
+      0 28px 90px rgba(51, 19, 117, 0.45),
+      0 0 60px rgba(172, 63, 255, 0.25),
+      0 0 100px rgba(214, 70, 239, 0.15),
+      inset 0 0 80px rgba(172, 63, 255, 0.1);
+  }
+  50% {
+    /* Image at zoomed scale (1.05) = stronger glow */
+    box-shadow: 
+      0 28px 90px rgba(51, 19, 117, 0.55),
+      0 0 80px rgba(172, 63, 255, 0.4),
+      0 0 120px rgba(214, 70, 239, 0.25),
+      inset 0 0 100px rgba(172, 63, 255, 0.15);
+  }
+}
+
+@keyframes pulse-dot {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 0.95;
+  }
+
+  50% {
+    transform: scale(1.3);
+    opacity: 0.55;
+  }
+}
+
+@media (max-width: 1440px) {
+  html {
+    font-size: 15px;
+  }
+}
+
+@media (max-width: 1024px) {
+  html {
+    font-size: 14.5px;
+  }
+
+  .hero-heading {
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 768px) {
+  html {
+    font-size: 14px;
+  }
+
+  .container {
+    padding-left: 1.25rem;
+    padding-right: 1.25rem;
+  }
+
+  .btn-primary {
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  html {
+    font-size: 13px;
+  }
+
+  .hero-heading {
+    font-size: clamp(2rem, 7vw, 3rem);
+    gap: 0.4rem;
+  }
+
+  /* Mobile typography adjustments */
+  .hero-heading .greeting {
+    font-size: 0.45em;
+    letter-spacing: 0.1em;
+  }
+
+  .hero-heading .name {
+    font-size: 1.15em;
+  }
+
+  .hero-heading .highlight {
+    font-size: 0.8em;
+  }
+
+.hero-image-card {
+    width: 100%;
+    height: auto;
+    min-height: 300px;
+  }
+
+  .lets-work-section,
+  .card {
+    padding: 1.5rem;
+    border-radius: 1.75rem;
+  }
+
+  .filter-btn {
+    min-width: 8rem;
+  }
+}
+
+/* Tablet typography */
+@media (min-width: 481px) and (max-width: 768px) {
+  .hero-heading {
+    font-size: clamp(2.2rem, 6vw, 3.2rem);
+  }
+
+  .hero-heading .greeting {
+    font-size: 0.42em;
+  }
+
+  .hero-heading .name {
+    font-size: 1.25em;
+  }
+
+  .hero-heading .highlight {
+    font-size: 0.82em;
+  }
+}
