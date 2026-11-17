@@ -102,37 +102,35 @@ className="fixed inset-0 md:hidden"
               onClick={() => setIsOpen(false)}
             />
             
-{/* Slide-in menu panel */}
+            {/* Mobile dropdown panel */}
             <motion.div
-              initial={{ opacity: 0, x: '100%' }}
-              animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: '100%' }}
-              transition={{ type: 'tween', duration: 0.3, ease: 'easeOut' }}
-              className="md:hidden fixed top-16 right-0 bottom-0 w-64 border-l border-white/10"
-              style={{ 
-                zIndex: 50,
-                backgroundColor: theme === 'dark' ? '#0f172a' : '#ffffff',
-                boxShadow: '0 10px 30px rgba(0,0,0,0.25)',
+              initial={{ opacity: 0, y: -8 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -8 }}
+              transition={{ type: 'tween', duration: 0.2, ease: 'easeOut' }}
+              className="fixed inset-x-0 top-16 z-50 flex w-full flex-col gap-4 border-b border-[var(--card-border)] p-6 shadow-lg backdrop-blur-lg md:hidden"
+              style={{
+                backgroundColor: theme === 'dark'
+                  ? 'rgba(16, 13, 36, 0.98)'
+                  : 'rgba(237, 233, 248, 0.98)',
               }}
               id="mobile-menu"
               role="menu"
             >
-              <div className="px-4 py-4 space-y-2">
-                {navItems.map((item) => (
-                  <Link
-                    key={item.name}
-                    to={item.path}
-                    onClick={() => setIsOpen(false)}
-                    className={`block px-3 py-3 rounded-lg transition-all duration-200 hover:translate-x-1 ${
-                      location.pathname === item.path 
-                        ? 'text-accent bg-accent/20 font-semibold' 
-                        : 'text-text-primary hover:bg-white/10'
-                    }`}
-                  >
-                    {item.name}
-                  </Link>
-                ))}
-              </div>
+              {navItems.map((item) => (
+                <Link
+                  key={item.name}
+                  to={item.path}
+                  onClick={() => setIsOpen(false)}
+                  className={`w-full rounded-lg px-4 py-3 font-medium transition-colors hover:bg-accent/10 ${
+                    location.pathname === item.path
+                      ? 'bg-accent/15 text-accent font-semibold'
+                      : 'text-text-primary'
+                  }`}
+                >
+                  {item.name}
+                </Link>
+              ))}
             </motion.div>
           </>
         )}
