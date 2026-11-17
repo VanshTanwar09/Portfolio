@@ -217,7 +217,7 @@ Contact:    1 column (stacked)
 ### 1. **Image Lazy Loading**
 ```jsx
 <img 
-  src="/vansh.jpeg" 
+  src="/Vansh.jpeg" 
   alt="Vansh Tanwar"
   loading="lazy"  // ← Added
   className="hero-profile-img"

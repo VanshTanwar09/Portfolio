@@ -167,7 +167,7 @@ const heroSocials = [
             <div className="hero-image-card">
               <div className="hero-image-wrapper">
                 <img
-                  src="/vansh.jpeg"
+                  src="/Vansh.jpeg"
                   alt="Vansh Tanwar"
                   loading="lazy"
                   className="hero-profile-img"
