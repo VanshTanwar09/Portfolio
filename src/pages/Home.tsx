@@ -70,7 +70,7 @@ const heroSocials = [
   return (
     <div className="min-h-screen">
 {/* Hero Section */}
-      <section className="home-hero relative min-h-screen overflow-hidden px-4 sm:px-6 lg:px-8">
+      <section className="home-hero relative min-h-screen overflow-hidden px-4 pt-20 sm:px-6 lg:px-8">
         <div className="hero-hero-overlay-1 absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(139,0,255,0.18),transparent_20%),radial-gradient(circle_at_bottom_right,rgba(217,70,239,0.14),transparent_22%)] pointer-events-none" />
         <div className="hero-hero-overlay-2 absolute inset-0 bg-[linear-gradient(180deg,rgba(10,10,26,0.92),rgba(13,11,30,0.96))] pointer-events-none" />
 

@@ -383,7 +383,7 @@ main > section > div[class*="max-w"] {
     gap: 1rem;
     align-items: flex-start;
     min-height: auto;
-    padding-top: 2.5rem;
+    padding-top: 5rem;
     padding-bottom: 1.5rem;
   }
 
@@ -536,7 +536,7 @@ main > section > div[class*="max-w"] {
   
   .home-hero {
     gap: 0.75rem;
-    padding-top: 2rem;
+    padding-top: 5rem;
     padding-bottom: 1rem;
   }
 
@@ -571,7 +571,7 @@ main > section > div[class*="max-w"] {
   }
 
   .home-hero {
-    padding-top: 2.5rem;
+    padding-top: 5rem;
     padding-bottom: 1rem;
   }
 
@@ -640,7 +640,7 @@ main > section > div[class*="max-w"] {
 @media (max-height: 600px) and (orientation: landscape) {
   .home-hero {
     min-height: auto;
-    padding-top: 2rem;
+    padding-top: 5rem;
   }
 
   .hero-heading {
@@ -668,15 +668,6 @@ html.light .hero-hero-overlay-1 {
 
 html.light .hero-hero-overlay-2 {
   background: linear-gradient(180deg, rgba(248, 247, 252, 0.98), rgba(245, 243, 250, 0.96)) !important;
-}
-
-/* Navbar light mode */
-html.light nav {
-  background-color: transparent;
-}
-
-html.light nav.scrolled {
-  background-color: rgba(237, 233, 248, 0.85);
 }
 
 /* Card borders and shadows for light mode */
